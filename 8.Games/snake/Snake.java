@@ -65,10 +65,11 @@ public class Snake {
 
     public void move(Apple apple, Mine mine) {
         GameObject header = createNewHead();
-        if (header.x >= SnakeGame.WIDTH || header.y >= SnakeGame.HEIGHT || header.x < 0 || header.y < 0) {
+        /*if (header.x >= SnakeGame.WIDTH || header.y >= SnakeGame.HEIGHT || header.x < 0 || header.y < 0) {
             isAlive = false;
             return;
-        }
+        }*/
+        teleport(header);
 
         if (checkCollision(header)) {
             isAlive = false;
@@ -126,5 +127,17 @@ public class Snake {
 
     public int getLength() {
         return snakeParts.size();
+    }
+
+    public void teleport(GameObject head) {
+        if (head.x < 0) {
+            head.x += SnakeGame.WIDTH;
+        } else if (head.x >= SnakeGame.WIDTH) {
+            head.x -= SnakeGame.WIDTH;
+        } else if (head.y < 0) {
+            head.y += SnakeGame.HEIGHT;
+        } else if (head.y >= SnakeGame.HEIGHT) {
+            head.y -= SnakeGame.HEIGHT;
+        }
     }
 }
